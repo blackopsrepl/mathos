@@ -1,0 +1,9 @@
+pytest
+langchain
+langchain_openai
+openai
+pandas
+markdown
+fastapi
+pydantic
+uvicorn
