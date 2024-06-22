@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: mathos
+   namespace: mathos
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         app: mathos
+   template:
+      metadata:
+         labels:
+            app: mathos
+      spec:
+         containers:
+            - name: mathos
+              image: localhost/mathos:latest
+              imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: mathos-entrypoint
+   namespace: mathos
+spec:
+   type: NodePort
+   selector:
+      app: mathos
+   ports:
+      - port: 8000
+        targetPort: 8000
+        nodePort: 30003

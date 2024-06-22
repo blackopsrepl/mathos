@@ -1,0 +1,8 @@
+IProgress
+ipywidgets 
+langchain_community 
+langchain_openai 
+opensearch_py 
+tqdm
+unstructured
+networkx
