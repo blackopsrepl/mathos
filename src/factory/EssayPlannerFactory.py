@@ -36,9 +36,9 @@ class EssayPlanner(Archetype):
         outline = self.outline_chain.invoke({"topic": user_query, "subtopics": subtopics, "axes": axes})
         return outline
 
-class TaskSplitterFactory(ArchetypeFactory):
+class EssayPlannerFactory(ArchetypeFactory):
     def build(self) -> Archetype:
-        self.essay_planner = TaskSplitter()
+        self.essay_planner = EssayPlanner()
         self.essay_planner.set_openai_api_key()
         self.essay_planner.set_llm()
         self.essay_planner.set_prompt_templates()
