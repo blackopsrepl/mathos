@@ -5,6 +5,7 @@ from fastapi import Depends, FastAPI
 import uvicorn
 
 app = FastAPI()
+
 class DateRange(BaseModel):
     task_description: str
     start_date: date
