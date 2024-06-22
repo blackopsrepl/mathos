@@ -17,7 +17,7 @@ tasks:
     silent: false
   build:
     cmds:
-      - docker build -t mathos src/
+      - docker build -t mathos src/backend/
     silent: false
   kind-load:
     cmds:
@@ -25,9 +25,9 @@ tasks:
     silent: false
   deploy:
     cmds:
-      - kubectl apply -f src/deploy/mathos-k8s.yaml
+      - kubectl apply -f src/backend/deploy/mathos-k8s.yaml
     silent: false
   delete:
     cmds:
-      - kubectl delete -f src/deploy/mathos-k8s.yaml
+      - kubectl delete -f src/backend/deploy/mathos-k8s.yaml
     silent: false

@@ -1,12 +1,12 @@
 from langchain_openai import ChatOpenAI
-from langchain_community.schema import StrOutputParser
-from langchain_community.memory import ConversationBufferMemory
-from langchain_community.schema.runnable import RunnablePassthrough, RunnableLambda
+from langchain.schema import StrOutputParser
+from langchain.memory import ConversationBufferMemory
+from langchain.schema.runnable import RunnablePassthrough, RunnableLambda
 
 from operator import itemgetter
 
-from src.factory.ArchetypeFactory import Archetype, ArchetypeFactory
-import src.prompt_templates as prompt_templates
+from src.backend.factory.ArchetypeFactory import Archetype, ArchetypeFactory
+import src.backend.prompt_templates as prompt_templates
 
 class EssayPlanner(Archetype):
 
