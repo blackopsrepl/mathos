@@ -1,5 +1,9 @@
 from langchain.prompts import PromptTemplate
-essay_composer = {
+common = {
+    'prefix': 'Hello, you are MATHOS, a helpful AI that passes the Turing test.\nYou help with time management, learning and motivation'
+}
+
+project_composer = {
     # splits task provided by the user into subtasks
     'subtasks_template': PromptTemplate(input_variables=['task'], template="\n\nSei un agent AI per la pianificazione dei progetti. Il tuo compito è spezzare un task nei subtask necessari al suo completamento.\n Il task è il seguente: {task}.\nOutput: Lista di subtask.\n\n"),
     # splits subtasks into blocks TODO: optimize time unit consistency
@@ -19,12 +23,10 @@ essay_composer = {
     'schema_template': PromptTemplate(input_variables=['json_schema', 'timeline'], template="\n\nformatta i dati:\n{timeline}\n\nseguendo in modo ferreo questo schema JSON:\n{json_schema}\n\nOutput: payload JSON compilato garantendo integrità dei dati; nessun carattere aggiuntivo; corretta formattazione JSON con apici doppi; serializzabile.\n\n")
 }
 
-thesis_eng = {
-    'executive_loop': '\n\nHelp {user_name} prioritize tasks based on time constraints and motivation factors.\n\n',
-    'subtopics_template': PromptTemplate(input_variables=['topic'], template="\n\nHello, you are Clio, my personal ADHD Coach and Cognitive Life Integrated Operator.\nYou help with time management, learning and motivation. I need to plan a high school essay about {topic}.\nI need to find subtopics to research.\nFormat: neat markdown bullet list. \n\n"),
+essay_composer = {
+    'subtopics_template': PromptTemplate(input_variables=['topic'], template="\n\nI need to plan an essay about {topic}.\nI need to find subtopics to research.\nFormat: neat markdown bullet list. \n\n"),
     'axes_template': PromptTemplate(input_variables=['subtopics'], template="\n\ndivide the subtopics: \n{subtopics}\ninto 3 axes: history, ethical implications, practical applications.\nFrom there, provide a structured list of subtopics for each axis. Expand on each subtopic with a short summary. \nFormat: neat markdown bullet list. \n\n"),
-    'outline_template': PromptTemplate(input_variables=['input'], template="\n\n {input} \n\n"),
-    'timeline_template': PromptTemplate(input_variables=['input'], template="\n\n {input} \n\n"),
-    'four_cs_template': PromptTemplate(input_variables=['timeline'], template="for each task in the timeline {timeline}, suggest ideas to gamify it with the most appropriate C strategy:\n(Captivate), (Create), (Compete), (Complete).\nFormat: neat markdown bullet list.\n\n"),
-    'analysis_template': PromptTemplate(input_variables=['topic'], template="\n\n {topic} \n\n")
+    # TODO: isolate input (multiple input variables!) from PromptTemplate
+    'outline_template': PromptTemplate(input_variables=['input'], template="create a summary / outline for a high school essay on {topic}, with these subtopics: \n{subtopics}.\nSubtopics must be developed and organized around these 3 axes:\n{axes}\nProvide briefly summarized topics and subtopics.\nFormat: neat Markdown\n\n"),
+    'timeline_template': PromptTemplate(input_variables=['input'], template="\n\nplan a feasible linear timeline for a high school essay on {topic} with this outline:\n{outline}.\nthe essay has to be considered as the main task and it has to be broken down into subtasks.\nthe subtasks have to be organized in a feasible manner in the timeline.\nUse {subtopics} as subtasks.\nProvide an ordered timeline of subtasks for the essay. Start date: {start_date}. Deadline: {end_date}.\nFormat: neat markdown bullet list.\n\n")
 }
