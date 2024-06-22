@@ -17,13 +17,16 @@ tasks:
     silent: false
   build:
     cmds:
-      - docker build -t mathos src/backend/
+      - podman build -t mathos src/backend/
     silent: false
+  podman-deploy:
+    cmds:
+      - podman run --name mathos -p 8000:8000 localhost/mathos
   kind-load:
     cmds:
       - kind load docker-image localhost/mathos:latest --name kind
     silent: false
-  deploy:
+  kind-deploy:
     cmds:
       - kubectl apply -f src/backend/deploy/mathos-k8s.yaml
     silent: false
