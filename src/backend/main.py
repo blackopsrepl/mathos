@@ -1,14 +1,15 @@
 from datetime import date
 from pydantic import BaseModel, validator
-from src.factory.EssayPlannerFactory import EssayPlannerFactory
+from src.backend.factory.EssayPlannerFactory import EssayPlannerFactory
 from fastapi import Depends, FastAPI
 import uvicorn
 
 app = FastAPI()
+
 class DateRange(BaseModel):
     task_description: str
-    start_date: date
-    end_date: date
+    start_date: str
+    end_date: str
 
     @validator('end_date')
     def check_dates(cls, v, values, **kwargs):
