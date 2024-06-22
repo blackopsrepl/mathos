@@ -1,0 +1,36 @@
+# https://taskfile.dev
+
+version: '3'
+tasks:
+  kind-rollout:
+   - task: delete
+   - task: build
+   - task: kind-load
+   - task: deploy
+  changelog:
+    cmds:
+      - npx standard-version
+    silent: false
+  changelog-nocommit:
+    cmds:
+      - npx standard-version --skip.commit
+    silent: false
+  build:
+    cmds:
+      - podman build -t mathos src/backend/
+    silent: false
+  podman-deploy:
+    cmds:
+      - podman run --name mathos -p 8000:8000 localhost/mathos
+  kind-load:
+    cmds:
+      - kind load docker-image localhost/mathos:latest --name kind
+    silent: false
+  kind-deploy:
+    cmds:
+      - kubectl apply -f src/backend/deploy/mathos-k8s.yaml
+    silent: false
+  delete:
+    cmds:
+      - kubectl delete -f src/backend/deploy/mathos-k8s.yaml
+    silent: false
