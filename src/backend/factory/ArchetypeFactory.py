@@ -1,12 +1,12 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import json
-from src.backend.constants import openai_api_key as apikey
+from src.backend.constants import OPENAI_API_KEY as apikey
 
 class Archetype(ABC):
     
     def set_openai_api_key(self):
-        self.openai_api_key = apikey
+        self.OPENAI_API_KEY = apikey
 
     @abstractmethod
     def set_llm(self):
